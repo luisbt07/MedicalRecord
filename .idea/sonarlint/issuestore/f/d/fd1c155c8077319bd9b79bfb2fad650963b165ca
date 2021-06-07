@@ -1,0 +1,20 @@
+
+h	java:S112¿"FDefine and throw a dedicated exception instead of using a generic one.(«Êµëıÿÿÿÿ8àšä/
+g	java:S112R"FDefine and throw a dedicated exception instead of using a generic one.(èÿë®ıÿÿÿÿ8àšä/
+:
+java:S1643¦"Use a StringBuilder instead.(ò¦ÿè8Û¯ê/
+b	java:S112@"FDefine and throw a dedicated exception instead of using a generic one.(ØÂÇ8àšä/
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(áôĞšÿÿÿÿÿ
+l
+java:S2674\"JCheck the return value of the "read" call to see how many bytes were read.(¼«†Ãÿÿÿÿÿ8àšä/
+b	java:S1122"FDefine and throw a dedicated exception instead of using a generic one.(“¼ºƒ8àšä/
+9
+java:S1643¢"Use a StringBuilder instead.(‹İà78Û¯ê/
+?
+java:S1643ã"Use a StringBuilder instead.(ËÄ¤øÿÿÿÿ8ßÌÏŸ/
+g	java:S1127"FDefine and throw a dedicated exception instead of using a generic one.(Ë÷”îüÿÿÿÿ8àšä/
+c
+java:S2184ó"ECast one of the operands of this subtraction operation to a "double".(ãªã“8àšä/
+g	java:S1125"FDefine and throw a dedicated exception instead of using a generic one.(ïÔäÿÿÿÿÿ8àšä/
+w
+java:S3012ø"YUse "Arrays.copyOf", "Arrays.asList", "Collections.addAll" or "System.arraycopy" instead.(Œ«—œ8àšä/

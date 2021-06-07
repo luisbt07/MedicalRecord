@@ -1,0 +1,21 @@
+
+a
+java:S2184ó"ECast one of the operands of this subtraction operation to a "double".(Äê©ãøÿÿÿÿ
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(áôĞšÿÿÿÿÿ
+8
+java:S1643¦"Use a StringBuilder instead.(òí—ìüÿÿÿÿ
+a	java:S112¿"FDefine and throw a dedicated exception instead of using a generic one.(«Êµëıÿÿÿÿ
+`	java:S1122"FDefine and throw a dedicated exception instead of using a generic one.(¿÷ª¤üÿÿÿÿ
+`	java:S1127"FDefine and throw a dedicated exception instead of using a generic one.(Ë÷”îüÿÿÿÿ
+`	java:S1125"FDefine and throw a dedicated exception instead of using a generic one.(ïÔäÿÿÿÿÿ
+3
+java:S1643¢"Use a StringBuilder instead.(°şŸ¢
+3
+java:S1643ã"Use a StringBuilder instead.(õïíß
+`
+java:S2674\"JCheck the return value of the "read" call to see how many bytes were read.(®şÏú
+d	java:S100é"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¯Ê¼û
+[	java:S112R"FDefine and throw a dedicated exception instead of using a generic one.(¬£ûƒ
+`	java:S112@"FDefine and throw a dedicated exception instead of using a generic one.(¶ïÕ°øÿÿÿÿ
+p
+java:S3012ø"YUse "Arrays.copyOf", "Arrays.asList", "Collections.addAll" or "System.arraycopy" instead.(“­¯¯
