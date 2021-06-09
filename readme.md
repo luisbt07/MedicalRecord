@@ -1,6 +1,6 @@
 # Medical Record - Sistema de Prontuários
 
-`CURSO: Engenharia de computação`
+`CURSO: Engenharia de Computação PUC MINAS`
 
 `DISCIPLINA: Algoritmo e Estutura de Dados III`
 
