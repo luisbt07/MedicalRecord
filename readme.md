@@ -1,4 +1,4 @@
-# CoGym 
+# Medical Record - Sistema de Prontuários
 
 `CURSO: Engenharia de computação`
 
