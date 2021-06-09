@@ -1,19 +1,20 @@
-# TABELA HASH EXTENSÍVEL
+# Medical Record - Sistema de Prontuários
 
-Implementação da tabela hash extensível para a disciplina Algoritmos e Estruturas de Dados 3 do curso de Ciência da computação da PUC Minas.
+`CURSO: Engenharia de Computação PUC MINAS`
 
-Esta tabela tem uma implementação ligeiramente diferente das tabelas tradicionais, em que contamos com as seguintes operações:
+`DISCIPLINA: Algoritmo e Estutura de Dados III`
 
-- create(C, V)
-- V <- read(C)
-- update(C, V)
-- delete(C)
 
-Nessas operações, usamos explicitamente uma chave (C) e um valor (V).
+## Participantes
 
-Neste projeto, porém, podemos armazenar qualquer tipo de objeto. Esse objeto precisa ter um atributo que será identificado como chave e que terá o seu hash calculado por meio do método hashCode().
+Os membros do grupo são: 
+- Ana Vitória Menezes
+- Luís Brandão Teixeira
 
-Para assegurar o funcionamento correto da tabela hash extensível, esse objeto deve implementar a interface RegistroHashExtensível.
 
-_Implementado pelo Prof. Marcos Kutova_
-_v1.1 - 2021_
+# Documentação
+
+1. [Contexto](docs/1-Contexto.md)
+2. [Implementação](docs/2-Implementação.md)
+3. [Testes e Avaliação](docs/3-Testes.md)
+4. [Referências](docs/4-Referências.md)
