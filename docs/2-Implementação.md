@@ -53,21 +53,31 @@ Implementação do **fromByteArray()** para transformar os dados lidos de um vet
 
 Responsável por toda a parte complexa do código implementação de cada caso de uso:
 
-- **Inserção de um novo elemento:** ![image](https://user-images.githubusercontent.com/57811501/121287495-064a4380-c8b8-11eb-918f-ad50409c55f6.png)
+- **Inserção de um novo elemento:**
+
+ 
+![image](https://user-images.githubusercontent.com/57811501/121287495-064a4380-c8b8-11eb-918f-ad50409c55f6.png)
 
 
-  Se o **bucket não estiver cheio** ele insere o novo objeto no bucket convertendo o objeto em um vetor de bytes para ser inserido no arquivo. **Caso contrário** ele identifica que o bucket está cheio e inicia a duplicação do diretório e cria os novos cestos e insere novamente os elementos nos buckets de acordo com suas respectivas chaves de chaves. 
+  Se o **bucket não estiver cheio** ele insere o novo objeto no bucket convertendo o objeto em um vetor de bytes para ser inserido no arquivo. **Caso contrário** ele identifica que o bucket está cheio e inicia a duplicação do diretório e cria os novos cestos e insere novamente os elementos nos buckets de acordo com suas respectivas chaves.
+
+ 
   ![image](https://user-images.githubusercontent.com/57811501/121288084-2deddb80-c8b9-11eb-8244-a5ca75bf8154.png)
 
 - **Leitura de um elemento no arquivo de prontuários:**
   Essa leitura recebe uma key que é o CPF que é utilizado como índice para encontrar os dados nos buckets, assim que chamada é carregado o diretório atual e acionado o hash do diretório com a key do CPF para retornar índice para o cesto. Logo a frente é utilizado o index para pegar o endereço do cesto buscar esse elemento dentro desse cesto. E retorna esse elemento lido no cesto.
+
   ![image](https://user-images.githubusercontent.com/57811501/121288641-106d4180-c8ba-11eb-8e68-44419bdd45e9.png)
 
 - **Deletar um elemento da lista de prontuários:**
   Para excluir um elemento a função recebe uma key que é o CPF, carrega o diretório atual, aciona o hash do diretório com a key do CPF para retornar um índice para o cesto. Logo a frente é utilizado o index para encontrar o endereço do cesto, logo após ele carrega o cesto com esse endereço, e faz a exclusão desse cesto, e atualiza o cesto no arquivo.
+
+
   ![image](https://user-images.githubusercontent.com/57811501/121290004-44e1fd00-c8bc-11eb-877a-6d0bdbd0faf4.png)
 
-- Para imprimir todos os dados desse arquivo na tela é feito o mesmo procedimento de carregamento de diretório, inicializando a leitura do arquivo do cesto na posição 0, e seguindo a leitura até o fim do arquivo. Imprimindo em um formato legível para o usuário. 
+- Para imprimir todos os dados desse arquivo na tela é feito o mesmo procedimento de carregamento de diretório, inicializando a leitura do arquivo do cesto na posição 0, e seguindo a leitura até o fim do arquivo. Imprimindo em um formato legível para o usuário.
+
+ 
   ![image](https://user-images.githubusercontent.com/57811501/121290605-4e1f9980-c8bd-11eb-8ddc-e05b1c3f81a8.png)
 
 
