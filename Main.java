@@ -21,17 +21,17 @@ import java.util.Scanner;
 
 public class Main {
 
-    // Método principal apenas para testes
+    // Método principal para testar valores
     public static void main(String[] args) {
 
-        HashExtensivel<PersonForMedicalRecord> he;
+        ExtensibleHash<PersonForMedicalRecord> he;
         Scanner console = new Scanner(System.in);
 
         try {
             File directory = new File("dados");
             if (!directory.exists())
                 directory.mkdir(); // create directory
-            he = new HashExtensivel<>(PersonForMedicalRecord.class.getConstructor(), 3, "dados/PersonForMedicalRecord.hash_directory.db",
+            he = new ExtensibleHash<>(PersonForMedicalRecord.class.getConstructor(), 3, "dados/PersonForMedicalRecord.hash_directory.db",
                     "dados/PersonForMedicalRecord.hash_bucket.db");
 
             int opcao;
@@ -65,14 +65,14 @@ public class Main {
                         int id = Integer.parseInt(console.nextLine());
                         he.create(new PersonForMedicalRecord(name, birthDate, sex, cpf, id));
                         he.print();
-                    }
+                    } // Inserir
                     break;
                     case 2: {
                         System.out.println("\nBUSCA");
                         System.out.print("CPF: ");
                         Long cpf = Long.parseLong(console.nextLine());
                         System.out.print("Dados: " + he.read(cpf.hashCode()));
-                    }
+                    } // Buscar
                     break;
                     case 3: {
                         System.out.println("\nEXCLUSÃO");
@@ -81,13 +81,13 @@ public class Main {
                         Long cpf = Long.parseLong(console.nextLine());
                         he.delete(cpf.hashCode());
                         he.print();
-                    }
+                    }//Excluir
                     break;
                     case 4: {
                         he.print();
-                    }
+                    }//Imprimir
                     break;
-                    case 0:
+                    case 0:// Sair
                         break;
                     default:
                         System.out.println("Opção inválida");
@@ -100,7 +100,7 @@ public class Main {
         console.close();
     }
 }
-interface RegistroHashExtensivel<T> {
+interface HashRecord<T> {
 
     public int hashCode(); // chave numérica para ser usada no diretório
 
@@ -111,7 +111,7 @@ interface RegistroHashExtensivel<T> {
     public void fromByteArray(byte[] ba) throws IOException; // vetor de bytes a ser usado na construção do elemento
 
 }
-class HashExtensivel<T extends RegistroHashExtensivel<T>> {
+class ExtensibleHash<T extends HashRecord<T>> {
 
     String directoryFileName;
     String bucketFileName;
@@ -357,7 +357,7 @@ class HashExtensivel<T extends RegistroHashExtensivel<T>> {
 
     }
 
-    public HashExtensivel(Constructor<T> constructor, int n, String directoryFileName, String bucketFileName) throws Exception {
+    public ExtensibleHash(Constructor<T> constructor, int n, String directoryFileName, String bucketFileName) throws Exception {
         this.constructor = constructor;
         amountDataPerBucket = n;
         this.directoryFileName = directoryFileName;
@@ -452,7 +452,7 @@ class HashExtensivel<T extends RegistroHashExtensivel<T>> {
     public T read(int key) throws Exception {
 
         // Carrega o diretório
-        byte[] byteArrayDirectory = chargeDirectory();
+        chargeDirectory();
 
         int index = directory.hash(key); // Identifica a hash do diretório,
 
@@ -550,15 +550,15 @@ class HashExtensivel<T extends RegistroHashExtensivel<T>> {
         bucketFile.write(bucket.toByteArrayBucket());
     }
 }
-class PersonForMedicalRecord implements RegistroHashExtensivel<PersonForMedicalRecord> {
+class PersonForMedicalRecord implements HashRecord<PersonForMedicalRecord> {
 
     String name;//45
     String birthDate;//10
     String sex;//9
-    Long cpf;//8
+    Long cpf;//11
     int id;// 4
     short cpfSize = 11;
-    short maxSize = 76;
+    short maxSize = 79;
 
     public PersonForMedicalRecord() {
         name = null;
