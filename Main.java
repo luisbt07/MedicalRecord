@@ -329,16 +329,16 @@ class ExtensibleHash<T extends HashRecord<T>> {
             if (globalDepth == 127)
                 return false;
             globalDepth++;
-            int q1 = (int) Math.pow(2, globalDepth - 1);
-            int q2 = (int) Math.pow(2, globalDepth);
-            long[] newAddress = new long[q2];
+            int oldSize = (int) Math.pow(2, globalDepth - 1);
+            int newSize = (int) Math.pow(2, globalDepth);
+            long[] newAddress = new long[newSize];
             int i = 0;
-            while (i < q1) {
+            while (i < oldSize) {
                 newAddress[i] = address[i];
                 i++;
             }
-            while (i < q2) {
-                newAddress[i] = address[i - q1];
+            while (i < newSize) {
+                newAddress[i] = address[i - oldSize];
                 i++;
             }
             address = newAddress;
