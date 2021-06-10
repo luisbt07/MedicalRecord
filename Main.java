@@ -2,7 +2,8 @@ import java.io.*;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.Scanner;
-
+// Luís Brandão Teixeira 671863
+//Ana Vitória Menezes 658673
 public class Main {
 
     // Método principal para testar valores
@@ -45,9 +46,11 @@ public class Main {
                         String sex = (console.nextLine());
                         System.out.print("CPF: ");
                         Long cpf = Long.parseLong(console.nextLine());
+                        System.out.print("Notas: ");
+                        String notes = (console.nextLine());
                         System.out.print("ID: ");
                         int id = Integer.parseInt(console.nextLine());
-                        he.create(new PersonForMedicalRecord(name, birthDate, sex, cpf, id));
+                        he.create(new PersonForMedicalRecord(name, birthDate, sex, cpf, notes, id));
                         he.print();
                     } // Inserir
                     break;
@@ -322,7 +325,7 @@ class ExtensibleHash<T extends HashRecord<T>> {
                 i++;
             }
             while (i < newSize) {
-                newAddress[i] = address[i - oldSize];
+                newAddress[i] = address[i - oldSize]; // Faz apontar para os novos endereços
                 i++;
             }
             address = newAddress;
@@ -341,9 +344,9 @@ class ExtensibleHash<T extends HashRecord<T>> {
 
     }
 
-    public ExtensibleHash(Constructor<T> constructor, int n, String directoryFileName, String bucketFileName) throws Exception {
+    public ExtensibleHash(Constructor<T> constructor, int amountDataPerBucket, String directoryFileName, String bucketFileName) throws Exception {
         this.constructor = constructor;
-        amountDataPerBucket = n;
+        this.amountDataPerBucket = amountDataPerBucket;
         this.directoryFileName = directoryFileName;
         this.bucketFileName = bucketFileName;
 
@@ -356,14 +359,14 @@ class ExtensibleHash<T extends HashRecord<T>> {
 
             // Cria um novo diretório, com profundidade de 0 bits (1 único elemento)
             directory = new Directory();
-            byte[] byteArrayDirectory = directory.toByteArray();
-            directoryFile.write(byteArrayDirectory);
+            byte[] byteArrayDirectory = directory.toByteArray(); //cria um vetor de bytes
+            directoryFile.write(byteArrayDirectory);// escreve dentro desse vetor de bytes o que tem dentro do diretório
 
             // Cria um cesto vazio, já apontado pelo único elemento do diretório
             Bucket bucket = new Bucket(constructor, amountDataPerBucket);
-            byteArrayDirectory = bucket.toByteArrayBucket();
-            bucketFile.seek(0);
-            bucketFile.write(byteArrayDirectory);
+            byteArrayDirectory = bucket.toByteArrayBucket(); // cria um vetor de bytes
+            bucketFile.seek(0);//aponta para posição 0 do arquivo do bucket
+            bucketFile.write(byteArrayDirectory);//Escreve dentro do vetor de bytes os dados do bucket
         }
     }
 
@@ -376,9 +379,9 @@ class ExtensibleHash<T extends HashRecord<T>> {
         int index = directory.hash(elem.hashCode());
 
         // Recupera o cesto
-        long bucketAddress = directory.address(index);
-        Bucket bucket = new Bucket(constructor, amountDataPerBucket);
-        chargeBucket(bucketAddress, bucket);
+        long bucketAddress = directory.address(index); // pega o endereço do bucket
+        Bucket bucket = new Bucket(constructor, amountDataPerBucket); // constrói o bucket com o tamanho máximo de dados por bucket
+        chargeBucket(bucketAddress, bucket); //carrega o bucket
 
         // Testa se a chave já não existe no cesto
         if (bucket.read(elem.hashCode()) != null)
@@ -523,8 +526,8 @@ class ExtensibleHash<T extends HashRecord<T>> {
     }
 
     public void chargeBucket(long bucketAddress, Bucket bucket) throws Exception {
-        byte[] byteArrayBucket = new byte[bucket.size()];
-        bucketFile.seek(bucketAddress);//direciona pontei para o endereço do cesto
+        byte[] byteArrayBucket = new byte[bucket.size()]; //cria um vetor de bytes do tamanho do bucket
+        bucketFile.seek(bucketAddress);//direciona ponteiro para o endereço do cesto
         bucketFile.read(byteArrayBucket);//Lê os dados do cesto e joga em um byteArray
         bucket.fromByteArrayBucket(byteArrayBucket);//Transforma os dados do byte array em objeto
     }
@@ -540,9 +543,11 @@ class PersonForMedicalRecord implements HashRecord<PersonForMedicalRecord> {
     String birthDate;//10
     String sex;//9
     Long cpf;//11
+    String notes;//45
+
     int id;// 4
     short cpfSize = 11;
-    short maxSize = 79;
+    short maxSize = 124;
 
     public PersonForMedicalRecord() {
         name = null;
@@ -551,12 +556,13 @@ class PersonForMedicalRecord implements HashRecord<PersonForMedicalRecord> {
         cpf = 0L;
     }
 
-    public PersonForMedicalRecord(String name, String birthDate, String sex, Long cpf, int id) {
+    public PersonForMedicalRecord(String name, String birthDate, String sex, Long cpf, String notes, int id) {
         try {
             this.name = name;
             this.birthDate = birthDate;
             this.sex = sex;
             this.cpf = cpf;
+            this.notes = notes;
             this.id = id;
             if (String.valueOf(cpf).length() != cpfSize)
                 throw new Exception("Número de caracteres do cpf está incorreto o dado não será inserido");
@@ -575,7 +581,7 @@ class PersonForMedicalRecord implements HashRecord<PersonForMedicalRecord> {
     }
 
     public String toString() {
-        return "\nNome: " + this.name +"\nData de nascimento: " + this.birthDate +"\nSexo: " + this.sex +"\n CPF: " + this.cpf + ";" + this.id;
+        return "\nNome: " + this.name +"\nData de nascimento: " + this.birthDate +"\nSexo: " + this.sex +"\n CPF: " + this.cpf + ";" + "\n Notas: " + this.notes + ";  "+ this.id;
     }
 
     public byte[] toByteArray() throws IOException {
@@ -585,6 +591,7 @@ class PersonForMedicalRecord implements HashRecord<PersonForMedicalRecord> {
         dOutputStream.writeUTF(birthDate);
         dOutputStream.writeUTF(sex);
         dOutputStream.writeLong(cpf);
+        dOutputStream.writeUTF(notes);
         dOutputStream.writeInt(id);
         byte[] bs = byteArrayOutputStream.toByteArray();
         byte[] bs2 = new byte[maxSize];
@@ -602,6 +609,7 @@ class PersonForMedicalRecord implements HashRecord<PersonForMedicalRecord> {
         birthDate =dInputStream.readUTF();
         sex =  dInputStream.readUTF();
         cpf = dInputStream.readLong();
+        notes = dInputStream.readUTF();
         this.id = dInputStream.readInt();
     }
 
